@@ -28,14 +28,15 @@ An e-commerce application applying micro-services architecture.
 
 ## Others
 
-| Name                      | Technology                                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| API Gateway               | Kong Gateway                                                                                                 |
-| Async Communication (M2M) | RabbitMQ                                                                                                     |
-| Sync Communication (M2M)  | gRPC                                                                                                         |
-| Identity Provider         | Auth0                                                                                                        |
-| Payment                   | Stripe                                                                                                       |
-| CI/CD Pipeline            | ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white) |
+| Name                        | Technology                                                                                                   |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| API Gateway                 | Kong Gateway                                                                                                 |
+| Async Communication (M2M)   | RabbitMQ                                                                                                     |
+| Sync Communication (M2M)    | gRPC                                                                                                         |
+| Identity Provider           | Auth0                                                                                                        |
+| Payment                     | Stripe                                                                                                       |
+| CI/CD Pipeline              | ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white) |
+| Storage and Shared Database | ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)   |
 
 ## Architecture
 
