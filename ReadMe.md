@@ -39,4 +39,4 @@ An e-commerce application applying micro-services architecture.
 
 ## Architecture
 
-![architecture](./eshop-architecture.png)
+![architecture](./assets/eshop-architecture.png)
