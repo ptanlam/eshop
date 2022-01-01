@@ -28,15 +28,16 @@ An e-commerce application applying micro-services architecture.
 
 ## Others
 
-| Name                        | Technology                                                                                                   |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| API Gateway                 | Kong Gateway                                                                                                 |
-| Async Communication (M2M)   | RabbitMQ                                                                                                     |
-| Sync Communication (M2M)    | gRPC                                                                                                         |
-| Identity Provider           | Auth0                                                                                                        |
-| Payment                     | Stripe                                                                                                       |
-| CI/CD Pipeline              | ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white) |
-| Storage and Shared Database | ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)   |
+| Name                        | Technology                                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Containers managing         | ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)               |
+| API Gateway                 | Kong Gateway                                                                                                        |
+| Async Communication (M2M)   | ![RabbitMQ](https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white) |
+| Sync Communication (M2M)    | gRPC                                                                                                                |
+| Identity Provider           | Auth0                                                                                                               |
+| Payment                     | ![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)               |
+| CI/CD Pipeline              | ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)        |
+| Storage and Shared Database | ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)          |
 
 ## Architecture
 
@@ -44,10 +45,28 @@ An e-commerce application applying micro-services architecture.
 
 ## Prerequisites
 
-  1. Docker Desktop
+  1. [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  2. [AWS S3 credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
+  3. [Stripe publishable and secret keys](https://www.appinvoice.com/en/s/documentation/how-to-get-stripe-publishable-key-and-secret-key-23)
+  4. [Currency exchange rate API key](http://api.exchangeratesapi.io)
+  5. Switch to Linux containers **on Windows only** ![Switch daemon](./assets/switchdaemon.png)
+
+## Optionals
+
+  1. Linux environment (Windows users can use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/about))
+  2. Shell terminal
 
 ## Instructions
 
-  1. Change directory to this repository: `cd eshop`
-  2. Run: `docker compose up -d`
-  3. Run: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`
+  1. Open your terminal (shell for the sake of simplicity)
+  2. Change directory to this repository: `cd eshop`
+  3. Export environment variables:
+     1. `export AWS_REGION=your-aws-credentials`
+     2. `export AWS_ACCESS_KEY_ID=your-aws-credentials`
+     3. `export AWS_SECRET_ACCESS_KEY=your-aws-credentials`
+     4. `export AWS_BUCKET=your-aws-credentials`
+     5. `export STRIPE_PUBLISHABLE_KEY=your-stripe-credentials`
+     6. `export STRIPE_SECRET_KEY=your-stripe-credentials`
+     7. `export EXCHANGE_RATE_API_KEY=your-exchange-api-key`
+  4. Start all containers: `docker compose up -d`
+  5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`
