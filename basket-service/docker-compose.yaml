@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  basket-service:
+    container_name: basket-service
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_PORT=17223
+      - REDIS_HOST=redis-17223.c291.ap-southeast-2-1.ec2.cloud.redislabs.com
+      - REDIS_USERNAME=admin
+      - REDIS_PASSWORD=Kien@04052000
+      - MQ_URL=amqp://host.docker.internal:5672
+      - DB_HOST=host.docker.internal
+      - DB_PORT=1401
+      - DB_USERNAME=sa
+      - DB_PASSWORD=kien@04052000
+      - DB_NAME=Basket_Service_DB
+    ports:
+      - '3002:3002'
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.2
+    links:
+      - redis
+
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    environment:
+      - REDIS_USERNAME=admin
+      - REDIS_PASSWORD=Kien@04052000
+      - REDIS_HOST=redis-17223.c291.ap-southeast-2-1.ec2.cloud.redislabs.com
+      - REDIS_PORT = 17223

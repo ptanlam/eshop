@@ -1,4 +1,4 @@
-FROM postgres:14-bullseye
+FROM postgres:14.1-alpine
 USER root
 WORKDIR /usr/src/app
 COPY . /usr/src/app/

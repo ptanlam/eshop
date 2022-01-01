@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package discounts;
+
+service DiscountsService {
+  rpc ReturnProductsDiscounts (ReturnProductsDiscountsRequest) returns (ReturnProductsDiscountsResponse) {}
+}
+
+message ProductRequest{
+  string id = 1;
+  double price = 2;
+  string unit = 3;
+}
+
+message ReturnProductsDiscountsRequest{
+  repeated ProductRequest targets = 1;
+}
+
+message ProductDiscount{
+  string productId = 1;
+  double percentage = 2;
+  double modifiedPrice = 3; 
+}
+
+message ReturnProductsDiscountsResponse{
+  repeated ProductDiscount response = 1;
+}

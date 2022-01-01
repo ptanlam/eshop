@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package reviews;
+
+service ReviewsService {
+  rpc GetCountAndRatingForTarget (GetCountAndRatingForTargetRequest) returns (GetCountAndRatingForTargetResponse) {}
+}
+
+message GetCountAndRatingForTargetRequest {
+  string targetIds = 1;
+}
+
+message CountAndRating {
+  int32 numberOfReviews = 1;
+  double rating = 2;
+  string productId = 3;
+}
+
+message GetCountAndRatingForTargetResponse {
+  repeated CountAndRating response = 1;
+}

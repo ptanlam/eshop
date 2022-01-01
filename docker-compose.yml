@@ -17,6 +17,18 @@ services:
     build: ./postgres
     container_name: postgres
 
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: redis
+
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
+
+  catalog-service:
+    build: ./catalog-service
+    container_name: catalog-service
+
+  basket-service:
+    build: ./basket-service
+    container_name: basket-service
