@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  kong-gateway:
+    build: ./kong
+    container_name: kong-gateway
+
+  mssql:
+    build: ./mssql
+    container_name: mssql
+
+  mongo:
+    image: mongo:5.0.5
+    container_name: mongo
+
+  postgres:
+    build: ./postgres
+    container_name: postgres
+
+  rabbitmq:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq

@@ -1,0 +1,86 @@
+_format_version: "2.1"
+
+services:
+  - name: product-service
+    url: http://host.docker.internal:3010/products
+    routes:
+      - name: products-route
+        paths:
+          - /api/products
+
+  - name: category-service
+    url: http://host.docker.internal:3010/categories
+    routes:
+      - name: categories-route
+        paths:
+          - /api/categories
+
+  - name: basket-service
+    url: http://host.docker.internal:3011/baskets
+    routes:
+      - name: baskets-route
+        paths:
+          - /api/baskets
+
+  - name: review-service
+    url: http://host.docker.internal:3012/reviews
+    routes:
+      - name: reviews-route
+        paths:
+          - /api/reviews
+
+  - name: vendor-service
+    url: http://host.docker.internal:3014/vendors
+    routes:
+      - name: vendors-route
+        paths:
+          - /api/vendors
+
+  - name: payment-service
+    url: http://host.docker.internal:3015/payment
+    routes:
+      - name: payment-route
+        paths:
+          - /api/payment
+
+  - name: currency-service
+    url: http://host.docker.internal:3016/currencies
+    routes:
+      - name: currency-route
+        paths:
+          - /api/currencies
+
+  - name: discount-service
+    url: http://host.docker.internal:3017/discounts
+    routes:
+      - name: discount-route
+        paths:
+          - /api/discounts
+
+  - name: coupon-service
+    url: http://host.docker.internal:3018/coupons
+    routes:
+      - name: coupon-route
+        paths:
+          - /api/coupons
+
+  - name: point-service
+    url: http://host.docker.internal:3018/points
+    routes:
+      - name: point-route
+        paths:
+          - /api/points
+
+  - name: ordering-service
+    url: http://host.docker.internal:3019/orders
+    routes:
+      - name: ordering-route
+        paths:
+          - /api/orders
+
+  - name: notification-service
+    url: http://host.docker.internal:3020/notifications
+    routes:
+      - name: notification-route
+        paths:
+          - /api/notifications

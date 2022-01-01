@@ -42,3 +42,12 @@ An e-commerce application applying micro-services architecture.
 ## Architecture
 
 ![architecture](./assets/eshop-architecture.png)
+
+## Prerequisites
+
+  1. Docker Desktop
+
+## Instructions
+
+  1. Change directory to this repository: `cd eshop`
+  2. Run: `docker compose up -d`
