@@ -71,14 +71,6 @@ services:
     networks:
       - eshop
 
-  pgadmin:
-    image: dpage/pgadmin4:6.3
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=Admin@123
-    ports:
-      - 5050:80
-
   redis:
     command: 'redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"'
     environment:
