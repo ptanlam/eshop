@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package exchange_rates;
+
+service ExchangeRatesService {
+    rpc GetAmount(GetAmountRequest) returns (GetAmountResponse);
+}
+
+message GetAmountRequest {
+    string base = 1;
+    string destination = 2;
+    double amount = 3;
+}
+
+message GetAmountResponse {
+    double amount = 1;
+}

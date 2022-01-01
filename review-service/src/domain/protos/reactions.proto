@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package reactions;
+
+service ReactionsService {
+    rpc GetAllForTarget (GetReactionsForTargetRequest) returns (GetReactionsForTargetResponse);
+}
+
+message GetReactionsForTargetRequest {
+    string id = 1;
+}
+
+message Reaction {
+    string id = 1;
+    string ownerId = 2;
+    string targetId = 3;
+    int32 type = 4;
+}
+
+message GetReactionsForTargetResponse {
+    repeated Reaction reactions = 1;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrderingService.API";
+
+package products;
+
+service ProductsService{
+  rpc GetProductById (GetProductByIdRequest) returns (GetProductByIdResponse) {}
+}
+
+message GetProductByIdRequest{
+  string id = 1;
+}
+
+message GetProductByIdResponse{
+  string id = 1;
+  string name = 2;
+  string imageUrl = 3;
+}
+

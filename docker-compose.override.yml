@@ -107,6 +107,15 @@ services:
     networks:
       - eshop
 
+  mailhog:
+    mem_limit: 15m
+    cpus: 0.1
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - eshop
+
   catalog-service:
     environment:
       - PORT=3000
@@ -115,18 +124,17 @@ services:
       - DB_USERNAME=sa
       - DB_PASSWORD=Admin@123
       - DB_PORT=1433
-      - DB_HOST=host.docker.internal
-      - AUTH0_AUDIENCE=http://localhost:3000/
-      - AUTH0_DOMAIN=https://dev-914wvn2h.us.auth0.com/
-      - RABBIT_MQ_URI=amqp://guest:guest@host.docker.internal
-      - REVIEW_GRPC_CONNECTION_URL=host.docker.internal:4002
-      - STORAGE_GRPC_CONNECTION_URL=host.docker.internal:4003
-      - BRAND_GRPC_CONNECTION_URL=host.docker.internal:4004
+      - DB_HOST=mssql
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+      - REVIEW_GRPC_CONNECTION_URL=review-service:4002
+      - STORAGE_GRPC_CONNECTION_URL=storage-service:4003
+      - BRAND_GRPC_CONNECTION_URL=vendor-service:4004
       - EXCHANGE_GRPC_CONNECTION_URL=host.docker.internal:4006
       - DISCOUNT_GRPC_CONNECTION_URL=host.docker.internal:4007
     ports:
       - 3010:3000
-      - 4000:4000
+    expose:
+      - 4000
     restart: unless-stopped
     mem_limit: 128m
     cpus: 0.1
@@ -137,14 +145,13 @@ services:
       - eshop
 
   basket-service:
-    container_name: basket-service
     environment:
-      - REDIS_PORT=17223
-      - REDIS_HOST=host.docker.internal
-      - REDIS_USERNAME=admin
-      - REDIS_PASSWORD=Admin@123
-      - MQ_URL=amqp://guest:guest@host.docker.internal
-      - DB_HOST=host.docker.internal
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - REDIS_USERNAME=
+      - REDIS_PASSWORD=
+      - MQ_URL=amqp://guest:guest@rabbitmq
+      - DB_HOST=mssql
       - DB_PORT=1433
       - DB_USERNAME=sa
       - DB_PASSWORD=Admin@123
@@ -154,8 +161,231 @@ services:
     mem_limit: 100m
     cpus: 0.1
     depends_on:
+      - redis
       - mssql
       - rabbitmq
+    networks:
+      - eshop
+
+  review-service:
+    environment:
+      - PORT=3000
+      - GRPC_CONNECTION_URL=0.0.0.0:4002
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=Admin@123
+      - DB_NAME=Review_Service_Db
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+      - STORAGE_GRPC_CONNECTION_URL=host.docker.internal:4003
+      - REACTION_GRPC_CONNECTION_URL=host.docker.internal:4010
+    ports:
+      - 3012:3000
+    expose:
+      - 4002
+    restart: unless-stopped
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+      - rabbitmq
+    networks:
+      - eshop
+
+  storage-service:
+    environment:
+      - PORT=3000
+      - GRPC_CONNECTION_URL=0.0.0.0:4003
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=Admin@123
+      - DB_NAME=Storage_Service_Db
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_BUCKET=${AWS_BUCKET}
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+    ports:
+      - 3013:3000
+    expose:
+      - 4003
+    restart: unless-stopped
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+      - rabbitmq
+    networks:
+      - eshop
+
+  vendor-service:
+    environment:
+      - PORT=3000
+      - GRPC_CONNECTION_URL=0.0.0.0:4004
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=Admin@123
+      - DB_NAME=Vendor_Service_Db
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+      - CATALOG_GRPC_CONNECTION_URL=catalog-service:4000
+      - STORAGE_GRPC_CONNECTION_URL=storage-service:4003
+    ports:
+      - 3014:3000
+    expose:
+      - 4004
+    restart: unless-stopped
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+      - rabbitmq
+    networks:
+      - eshop
+
+  payment-service:
+    environment:
+      - SECRET_KEY=django-insecure-@th^zqyu(bf)e3*l8*pii8@v&%=o*e18j1*knui8*esi0d71fz
+      - DEBUG=False
+      - DATABASE_NAME=payment_service_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=Admin@123
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - RABBIT_MQ_URI=rabbitmq
+      - RABBIT_MQ_USER=guest
+      - RABBIT_MQ_PASSWORD=guest
+      - RABBIT_VIRTUAL_HOST=/
+      - PORT=0.0.0.0:8000
+      - EXCHANGE_RATE_GRPC_CONNECTION=currency-service:4006
+      - ALLOWED_HOSTS=payment-service
+      - ALLOWED_ORIGINS=http://localhost:3000,https://festive-bassi-552424.netlify.app
+    mem_limit: 256m
+    cpus: 0.1
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+      - postgres
+    ports:
+      - 3015:8000
+    expose:
+      - 50051
+    networks:
+      - eshop
+
+  currency-service:
+    environment:
+      - PORT=3000
+      - GRPC_CONNECTION_URL=0.0.0.0:4006
+      - EXCHANGE_RATE_URL=http://api.exchangeratesapi.io/v1/latest
+      - EXCHANGE_RATE_API_KEY=${EXCHANGE_RATE_API_KEY}
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=Admin@123
+      - DB_NAME=Exchange_Rate_Service_Db
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+    ports:
+      - 3016:3000
+    expose:
+      - 4006
+    networks:
+      - eshop
+
+  discount-service:
+    environment:
+      - PORT=3000
+      - GRPC_CONNECTION_URL=0.0.0.0:4007
+      - DB_NAME=Discount_Service_Db
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Admin@123
+      - DB_PORT=1433
+      - DB_HOST=mssql
+      - DISCOUNT_PACKAGE=discounts
+      - EXCHANGE_PACKAGE=exchange_rates
+      - STORAGE_GRPC_CONNECTION_URL=storage-service:4003
+      - EXCHANGE_GRPC_CONNECTION_URL=currency-service:4006
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+    ports:
+      - 3017:3000
+    expose:
+      - 4007
+    networks:
+      - eshop
+
+  coupon-service:
+    environment:
+      - PORT=3000
+      - DB_NAME=Coupon_Service_Db
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Admin@123
+      - DB_PORT=1433
+      - DB_HOST=mssql
+      - STORAGE_GRPC_CONNECTION_URL=storage-service:4003
+      - EXCHANGE_GRPC_CONNECTION_URL=currency-service:4006
+      - RABBIT_MQ_URI=amqp://guest:guest@rabbitmq
+    mem_limit: 100m
+    cpus: 0.1
+    depends_on:
+      - mssql
+      - rabbitmq
+    ports:
+      - 3018:3000
+    networks:
+      - eshop
+
+  ordering-service:
+    environment:
+      - RabbitMqOptions__UserName=guest
+      - RabbitMqOptions__Password=guest
+      - RabbitMqOptions__HostName=amqp://rabbitmq
+      - GrpcConnectionOptions__CatalogServiceUrl=http://catalog-service:4000
+      - GrpcConnectionOptions__VendorsServiceUrl=http://vendor-service:4004
+      - GrpcConnectionOptions__PaymentsServiceUrl=http://payment-service:50051
+      - CorsOptions__AllowedOrigins=http://localhost:3000,https://festive-bassi-552424.netlify.app,https://cocky-dubinsky-6bdcf5.netlify.app
+      - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=Ordering_Service_Db;User=SA;Password=Admin@123
+    mem_limit: 128m
+    cpus: 0.1
+    ports:
+      - 3019:80
+    depends_on:
+      - mssql
+      - rabbitmq
+    networks:
+      - eshop
+
+  notification-service:
+    environment:
+      - RabbitMqOptions__UserName=guest
+      - RabbitMqOptions__Password=guest
+      - RabbitMqOptions__HostAddress=amqp://rabbitmq
+      - MailKitEmailSenderOptions__SenderName=eshop-no-reply
+      - MailKitEmailSenderOptions__SenderEmail=eshop@noreply.com
+      - MailKitEmailSenderOptions__HostPassword=
+      - MailKitEmailSenderOptions__HostUsername=mailhog
+      - MailKitEmailSenderOptions__HostPort=1025
+      - MailKitEmailSenderOptions__HostAddress=mailhog
+      - NotificationServiceDbOptions__ConnectionString=mongodb://root:password@mongo:27017
+      - NotificationServiceDbOptions__DatabaseName=Notification_Service_Db
+      - NotificationServiceDbOptions__CollectionName=Notifications
+      - CorsOptions__AllowedOrigins=http://localhost:3000,https://festive-bassi-552424.netlify.app
+    mem_limit: 64m
+    cpus: 0.1
+    ports:
+      - 3020:80
+    depends_on:
+      - mongo
+      - mailhog
     networks:
       - eshop
 

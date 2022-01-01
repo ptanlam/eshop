@@ -25,6 +25,10 @@ services:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
 
+  mailhog:
+    image: mailhog/mailhog:1.0.1
+    container_name: mailhog
+
   catalog-service:
     build: ./catalog-service
     container_name: catalog-service
@@ -32,3 +36,39 @@ services:
   basket-service:
     build: ./basket-service
     container_name: basket-service
+
+  review-service:
+    build: ./review-service
+    container_name: review-service
+
+  storage-service:
+    build: ./storage-service
+    container_name: storage-service
+
+  vendor-service:
+    build: ./vendor-service
+    container_name: vendor-service
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+
+  currency-service:
+    build: ./currency-service
+    container_name: currency-service
+
+  discount-service:
+    build: ./discount-service
+    container_name: discount-service
+
+  coupon-service:
+    build: ./coupon-service
+    container_name: coupon-service
+
+  ordering-service:
+    build: ./ordering-service
+    container_name: ordering-service
+
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service

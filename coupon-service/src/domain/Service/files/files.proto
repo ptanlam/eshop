@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package files;
+
+service FilesService {
+  rpc GetAllForOwner (GetAllForOwnerRequest) returns (GetAllForOwnerResponse);
+  rpc UploadForOwner (UploadFilesForOwnerRequest) returns (UploadFilesForOwnerResponse);
+}
+
+message GetAllForOwnerRequest {
+  string ownerId = 1;
+}
+
+message File {
+  string id = 1;
+  string ownerId = 2;
+  string url = 3;
+}
+
+message GetAllForOwnerResponse {
+  repeated File files = 2;
+}
+
+message UploadedFile{
+  string filename = 1;
+  bytes buffer = 2; 
+  string mimetype = 3;
+}
+
+message UploadFilesForOwnerRequest {
+  string ownerId = 1;
+  repeated UploadedFile files = 2;
+}
+
+message UploadFilesForOwnerResponse {
+  repeated string urls = 1;
+}

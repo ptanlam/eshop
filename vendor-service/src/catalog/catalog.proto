@@ -1,0 +1,32 @@
+syntax = "proto3";
+option csharp_namespace = "OrderingService.API";
+
+package products;
+
+service ProductsService{
+    rpc GetProductById (GetProductByIdRequest) returns (GetProductByIdResponse) {}
+    rpc GetCategoryListForVendor (GetCategoryListForVendorRequest) returns (GetCategoryListForVendorResponse) {}
+}
+
+message GetCategoryListForVendorRequest{
+    string vendorId = 1;
+}
+
+message Category{
+    string id = 1;
+    string name = 2;
+}
+
+message GetCategoryListForVendorResponse{
+    repeated Category categories = 1;
+}
+
+message GetProductByIdRequest{
+    string id = 1;
+}
+
+message GetProductByIdResponse{
+    string id = 1;
+    string name = 2;
+    string imageUrl = 3;
+    }

@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrderingService.API";
+
+package payments;
+
+service PaymentsService {
+	rpc GetReceiptById (GetReceiptForOrderRequest) returns (GetReceiptForOrderResponse);
+}
+
+message GetReceiptForOrderRequest {
+	string id = 1;
+}
+
+message GetReceiptForOrderResponse {
+	string type = 1;
+	double amount = 2;
+	string currency = 3;
+	bool paid = 4;
+}
