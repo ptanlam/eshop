@@ -60,9 +60,6 @@ services:
       - eshop
 
   postgres:
-    container_name: postgres
-    user: root
-    image: postgres:14
     environment:
       - POSTGRES_PASSWORD=Admin@123
     volumes:

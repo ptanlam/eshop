@@ -50,3 +50,4 @@ An e-commerce application applying micro-services architecture.
 
   1. Change directory to this repository: `cd eshop`
   2. Run: `docker compose up -d`
+  3. Run: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`
