@@ -54,7 +54,7 @@ An e-commerce application applying micro-services architecture.
 
 ## Optionals
 
-  1. Linux environment (Windows users can use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/about))
+  1. Unix kernel environment (Windows users can use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/about))
   2. Shell terminal
 
 ## Instructions
