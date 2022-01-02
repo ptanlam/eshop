@@ -1,0 +1,49 @@
+.container {
+  left: 0;
+  right: 0;
+  z-index: 2;
+  position: absolute;
+
+  gap: 15px;
+  align-items: center;
+}
+
+.autocomplete {
+  width: 100%;
+}
+
+.input {
+  font-size: 1.4rem;
+  line-height: normal;
+  font-weight: bold;
+  background: none;
+
+  color: white;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid white;
+  caret-color: var(--primary-color);
+}
+
+.button {
+  border-radius: 5px;
+}
+
+.button > span {
+  font-weight: 500;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (min-width: 1023px) {
+  .container {
+    margin: 0 50px;
+  }
+
+  .input {
+    font-size: 2rem;
+  }
+}

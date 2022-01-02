@@ -1,0 +1,85 @@
+.container {
+  left: 10px;
+  right: 10px;
+  height: 90px;
+  display: flex;
+  position: fixed;
+
+  z-index: 999;
+  padding: 0 15px 0 20px;
+  align-items: center;
+  transition: top 0.3s;
+  background-color: white;
+
+  margin-top: 10px;
+  justify-content: space-between;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.logoContainer {
+  flex: 1;
+  display: flex;
+  line-height: 0.72;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logoText {
+  font-weight: 400;
+  font-size: 1.8rem;
+  letter-spacing: 0px;
+  margin: auto auto auto 15px;
+  font-family: 'Lobster', cursive;
+
+  color: var(--font-color-black);
+}
+
+.logoSubText {
+  color: var(--primary-color);
+  font-size: 0.7rem;
+  font-family: 'Mansalva', cursive;
+}
+
+.actionsContainer {
+  gap: 3px;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 666px) {
+  .container {
+    margin-top: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .logoText {
+    font-size: 2rem;
+  }
+
+  .logoSubText {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1023px) {
+  .container {
+    left: 15px;
+    right: 15px;
+    margin-top: 15px;
+    padding: 0 25px 0 20px;
+  }
+
+  .logoText {
+    font-size: 2.1rem;
+  }
+
+  .logoSubText {
+    font-size: 0.85rem;
+  }
+
+  .sidebarContainer {
+    display: none;
+  }
+}

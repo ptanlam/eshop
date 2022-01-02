@@ -1,0 +1,18 @@
+.stripe {
+  background: white;
+  padding: 10px 5px;
+  transition: all 0.3s;
+  line-height: 1.5715;
+  border-radius: 2px;
+
+  border: 1px solid #d9d9d9;
+  font-size: 1rem;
+}
+
+.stripe:hover,
+.stripe:focus {
+  border-color: #ffb35c;
+  box-shadow: 0 0 0 2px rgba(250, 149, 49, 0.2);
+  border-right-width: 1px !important;
+  outline: 0;
+}

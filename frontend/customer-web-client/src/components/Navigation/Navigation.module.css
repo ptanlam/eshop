@@ -1,0 +1,29 @@
+.container {
+  display: none;
+  text-transform: uppercase;
+  gap: 20px;
+  line-height: normal;
+}
+
+.linkItem {
+  font-weight: 700;
+  color: var(--font-color-dark-gray);
+  background: linear-gradient(var(--primary-color), var(--primary-color));
+  background-repeat: no-repeat;
+  background-size: 0% 3px;
+
+  font-size: 0.95rem;
+  background-position: left bottom;
+  transition: background-size 0.2s;
+}
+
+.linkItem:hover {
+  color: black;
+  background-size: 100% 3px;
+}
+
+@media (min-width: 1023px) {
+  .container {
+    display: flex;
+  }
+}

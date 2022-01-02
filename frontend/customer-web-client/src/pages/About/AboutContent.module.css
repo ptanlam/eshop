@@ -1,0 +1,11 @@
+.subtitle {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.paragraph {
+  text-align: justify;
+  font-size: 0.7rem;
+  color: var(--font-color-dark-gray);
+}

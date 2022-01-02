@@ -1,0 +1,57 @@
+.container {
+  gap: 10px;
+  display: flex;
+  margin: -24px;
+  position: relative;
+  flex-direction: column;
+
+  padding: 30px 0;
+  min-height: 100vh;
+}
+
+.list {
+  gap: 10px;
+  display: flex;
+  margin-bottom: 60px;
+  flex-direction: column;
+}
+
+.item {
+  margin: 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--font-color-level-3);
+  padding: 7px 0 7px 30px;
+
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  transition: all 0.1s;
+  border-left: 6px solid transparent;
+
+  gap: 10px;
+}
+
+.item:hover,
+.item:active,
+.item:focus {
+  border-left-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.authButtonContainer {
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  position: fixed;
+  left: calc(100% - 300px);
+
+  background-color: white;
+  box-shadow: -2px 0px 15px 0px rgba(135, 135, 135, 0.67);
+}
+
+@media (min-width: 1023px) {
+  .drawer {
+    display: none;
+  }
+}

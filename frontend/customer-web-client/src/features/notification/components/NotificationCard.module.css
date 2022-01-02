@@ -1,0 +1,21 @@
+.container {
+  cursor: default;
+  padding: 10px 20px;
+}
+
+.icon {
+  font-size: 0.7rem;
+  margin-right: 10px;
+}
+
+.note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--font-color-dark-gray);
+}
+
+.timestamp {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--font-color-level-3);
+}

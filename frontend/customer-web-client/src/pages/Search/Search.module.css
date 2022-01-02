@@ -1,0 +1,21 @@
+.container {
+  z-index: 1;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  position: absolute;
+
+  height: 100vh;
+  transition: background ease-in-out 0.3s;
+
+  display: flex;
+}
+
+@media (min-width: 1023px) {
+  .container {
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    height: calc(100vh + 10px);
+  }
+}

@@ -1,0 +1,36 @@
+.mainCategoryListContainer {
+  min-height: 90px;
+}
+
+.mainCategoryListContainer,
+.subCategoryListContainer {
+  height: 90vh;
+  box-shadow: 10px 15px 10px -5px rgba(0, 0, 0, 0.13);
+}
+
+.mainCategoryListContainer {
+  border-radius: 5px;
+  background-color: white;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+
+  padding: 10px 5px;
+  scrollbar-width: none;
+}
+
+.subCategoryListContainer {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  scrollbar-width: none;
+}
+
+@media (min-width: 768px) {
+  .mainCategoryListContainer {
+    flex-wrap: unset;
+    overflow-y: hidden;
+    height: auto;
+  }
+}

@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  background-color: var(--neutral-dark);
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.text {
+  color: var(--font-color-dark-gray);
+}
+
+.title {
+  composes: text;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #7e7e7e;
+}
+
+.subtitle {
+  composes: text;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+.purpose {
+  composes: text;
+  text-align: center;
+}

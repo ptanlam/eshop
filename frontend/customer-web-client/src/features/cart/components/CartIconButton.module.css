@@ -1,0 +1,15 @@
+.container {
+  display: none;
+}
+
+@media (min-width: 0) {
+  .container {
+    display: none;
+  }
+}
+
+@media (min-width: 1023px) {
+  .container {
+    display: inline-block;
+  }
+}

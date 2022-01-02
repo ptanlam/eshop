@@ -1,0 +1,28 @@
+.container {
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0 5px;
+  line-height: 0.8rem;
+
+  color: var(--font-color-dark-gray);
+}
+
+.img {
+  height: 50px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .img {
+    height: 70px;
+  }
+}

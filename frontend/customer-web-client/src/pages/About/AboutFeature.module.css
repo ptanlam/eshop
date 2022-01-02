@@ -1,0 +1,26 @@
+.container {
+  background: #eee;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+}
+
+.icon > span {
+  font-size: 1.2rem;
+  color: #ff5d00;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+}
+
+.paragraph {
+  font-size: 0.6rem;
+  text-align: justify;
+  color: var(--font-color-level-3);
+}

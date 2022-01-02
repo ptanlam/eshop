@@ -1,0 +1,14 @@
+.label {
+  font-weight: 500;
+  color: var(--font-color-gray);
+}
+
+.text {
+  font-weight: 700;
+}
+
+.subContainer {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+}

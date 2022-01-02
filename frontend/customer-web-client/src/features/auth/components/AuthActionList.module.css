@@ -1,0 +1,30 @@
+.container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  scrollbar-width: none;
+
+  top: 30px;
+  right: 10px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 30px;
+  justify-content: center;
+  width: calc(100vw - 20px);
+  background-color: white;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 1023px) {
+  .container {
+    top: 90px;
+    width: 400px;
+  }
+
+  .listItem {
+    width: 600px;
+  }
+}

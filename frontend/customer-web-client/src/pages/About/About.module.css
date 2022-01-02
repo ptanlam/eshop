@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.image {
+  width: 100%;
+  border-radius: 5px;
+}

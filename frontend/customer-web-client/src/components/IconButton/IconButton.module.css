@@ -1,0 +1,25 @@
+.icon {
+  border-radius: 50%;
+}
+
+.icon > span > svg {
+  font-size: large;
+}
+
+.icon:hover,
+.icon:active,
+.icon:focus {
+  background-color: rgba(4, 9, 20, 0.1);
+}
+
+@media (min-width: 666px) {
+  .icon > span > svg {
+    font-size: larger;
+  }
+}
+
+@media (min-width: 1023px) {
+  .icon > span > svg {
+    font-size: x-large;
+  }
+}

@@ -1,0 +1,7 @@
+.container {
+  gap: 10px;
+  display: flex;
+  min-height: 75vh;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
