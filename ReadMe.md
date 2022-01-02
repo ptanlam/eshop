@@ -71,6 +71,6 @@ An e-commerce application applying micro-services architecture.
      7. `export EXCHANGE_RATE_API_KEY=your-exchange-api-key`
      8. `export AUTH0_CLIENT_ID=your-auth0-credentials`
      9. `export AUTH0_DOMAIN=your-auth0-credentials`
-     10. `export AUTH0_SCOPE=your-auth0-scope`
+     10. `export AUTH0_SCOPE=your-auth0-credentials`
   4. Start all containers: `docker compose up -d`
   5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`
