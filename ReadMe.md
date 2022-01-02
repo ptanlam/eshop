@@ -72,8 +72,9 @@ An e-commerce application applying micro-services architecture.
      8. `export AUTH0_CLIENT_ID=your-auth0-credentials`
      9. `export AUTH0_DOMAIN=your-auth0-credentials`
      10. `export AUTH0_SCOPE=your-auth0-credentials`
-  4. Start all containers: `docker compose up -d`
+  4. Start PostgreSQL: `docker compose up postgres -d`
   5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`
-  6. Navigate to:
+  6. Start all containers: `docker compose up -d`
+  7. Navigate to:
      1. [Customer web client](http://localhost:3000)
      2. [Administration web client](http://localhost:3002)
