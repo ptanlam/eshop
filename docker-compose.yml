@@ -76,3 +76,7 @@ services:
   customer-web-client:
     build: ./frontend/customer-web-client
     container_name: customer-web-client
+
+  administration-web-client:
+    build: ./frontend/administration-web-client
+    container_name: administration-web-client
