@@ -16,10 +16,11 @@ namespace OrderingService.API.Application.Commands
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-        
+
         public async Task<Customer> Handle(GetCustomerByIdCommand request, CancellationToken cancellationToken)
         {
-            return await _repository.GetBySpecAsync(new CustomerByIdSpec(request.Id), cancellationToken);
+            var customer = await _repository.GetBySpecAsync(new CustomerByIdSpec(request.Id), cancellationToken);
+            return customer;
         }
     }
 }

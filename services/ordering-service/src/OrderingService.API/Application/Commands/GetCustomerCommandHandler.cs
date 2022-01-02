@@ -16,11 +16,10 @@ namespace OrderingService.API.Application.Commands
         public GetCustomerCommandHandler(IRepository<Customer> repository)
         {
             _repository = repository ??
-                throw new ArgumentNullException(nameof(repository));
+                          throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<Customer> Handle(
-            GetCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Customer> Handle(GetCustomerCommand request, CancellationToken cancellationToken)
         {
             var spec = new CustomerByEmailAndPhoneNumberSpec(request.Email, request.PhoneNumber);
             var customer = await _repository.GetBySpecAsync(spec, cancellationToken);

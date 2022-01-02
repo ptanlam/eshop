@@ -22,21 +22,15 @@ namespace OrderingService.API.Application.Commands
         public CreateNewOrderCommandHandler(IRepository<Order> repository,
             IBusControl bus, IMapper mapper)
         {
-            _repository = repository ??
-                throw new ArgumentNullException(nameof(repository));
-
-            _bus = bus ??
-                throw new ArgumentNullException(nameof(bus));
-
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Order> Handle(
-            CreateNewOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Order> Handle(CreateNewOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = new Order(request.CustomerId, request.VendorId,
-                request.Items, request.ShippingAddressId, request.Receipt.Id, request.Notes);
+            var order = new Order(request.CustomerId, request.VendorId, request.Items, request.ShippingAddressId,
+                request.Receipt.Id, request.Notes);
 
             order = await _repository.AddAsync(order, cancellationToken);
 
@@ -45,7 +39,7 @@ namespace OrderingService.API.Application.Commands
                 request.CustomerEmail,
                 Items = _mapper.Map<IEnumerable<ItemDto>>(order.Items),
                 TotalPrice = request.Receipt.Amount,
-                PriceUnit = request.Receipt.Currency,
+                PriceUnit = request.Receipt.Currency
             }, cancellationToken);
 
             return order;

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using OrderingService.API.Models;
 using Xunit;
 
 namespace OrderingService.IntegrationTests.ItemEndpoints
@@ -27,7 +28,7 @@ namespace OrderingService.IntegrationTests.ItemEndpoints
 
             var request = new UpdateItemInOrderRequest()
             {
-                Item = new()
+                Item = new ItemForUpdateDto
                 {
                     Operator = "Plus",
                     Quantity = 12

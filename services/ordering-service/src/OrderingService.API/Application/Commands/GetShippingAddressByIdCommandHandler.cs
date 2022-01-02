@@ -17,9 +17,8 @@ namespace OrderingService.API.Application.Commands
         public GetShippingAddressByIdCommandHandler(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
-
         }
-        
+
         public async Task<ShippingAddress> Handle(
             GetShippingAddressByIdCommand request, CancellationToken cancellationToken)
         {

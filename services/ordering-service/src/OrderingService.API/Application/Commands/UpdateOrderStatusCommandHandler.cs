@@ -16,14 +16,10 @@ namespace OrderingService.API.Application.Commands
         private readonly IBusControl _bus;
         private readonly IMapper _mapper;
 
-        public UpdateOrderStatusCommandHandler(IBusControl bus,
-            IMapper mapper)
+        public UpdateOrderStatusCommandHandler(IBusControl bus, IMapper mapper)
         {
-            _bus = bus ??
-                throw new ArgumentNullException(nameof(bus));
-
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<Unit> Handle(
@@ -31,9 +27,8 @@ namespace OrderingService.API.Application.Commands
         {
             await _bus.Publish<OrderApprovedIntegrationEvent>(new
             {
-                Items = _mapper.Map<IEnumerable<
-                   ItemForOrderApprovedIntegrationEventDto>>(request.Items),
-                request.OrderId,
+                Items = _mapper.Map<IEnumerable<ItemForOrderApprovedIntegrationEventDto>>(request.Items),
+                request.OrderId
             }, cancellationToken);
 
             return Unit.Value;
