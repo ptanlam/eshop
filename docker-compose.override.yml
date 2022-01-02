@@ -392,9 +392,10 @@ services:
       - 3000:80
     mem_limit: 64m
     cpus: 0.1
+    depends_on:
+      - kong-gateway
     networks:
       - eshop
-      - kong-gateway
 
   administration-web-client:
     build:
@@ -406,6 +407,8 @@ services:
     cpus: 0.1
     ports:
       - 3002:80
+    depends_on:
+      - kong-gateway
     networks:
       - eshop
 
