@@ -49,7 +49,8 @@ An e-commerce application applying micro-services architecture.
   2. [AWS S3 credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
   3. [Stripe publishable and secret keys](https://www.appinvoice.com/en/s/documentation/how-to-get-stripe-publishable-key-and-secret-key-23)
   4. [Currency exchange rate API key](http://api.exchangeratesapi.io)
-  5. Switch to Linux containers **on Windows only** ![Switch daemon](./assets/switchdaemon.png)
+  5. [Auth0 client-id, domain and scope](https://auth0.com/blog/complete-guide-to-react-user-authentication/)
+  6. Switch to Linux containers **on Windows only** ![Switch daemon](./assets/switchdaemon.png)
 
 ## Optionals
 
@@ -68,5 +69,8 @@ An e-commerce application applying micro-services architecture.
      5. `export STRIPE_PUBLISHABLE_KEY=your-stripe-credentials`
      6. `export STRIPE_SECRET_KEY=your-stripe-credentials`
      7. `export EXCHANGE_RATE_API_KEY=your-exchange-api-key`
+     8. `export AUTH0_CLIENT_ID=your-auth0-credentials`
+     9. `export AUTH0_DOMAIN=your-auth0-credentials`
+     10. `export AUTH0_SCOPE=your-auth0-scope`
   4. Start all containers: `docker compose up -d`
   5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name=postgres$ -q) ./import-databases.sh`

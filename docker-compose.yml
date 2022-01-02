@@ -72,3 +72,7 @@ services:
   notification-service:
     build: ./services/notification-service
     container_name: notification-service
+
+  customer-web-client:
+    build: ./frontend/customer-web-client
+    container_name: customer-web-client
