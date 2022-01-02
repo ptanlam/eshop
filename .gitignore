@@ -4,6 +4,7 @@ dist
 dist-ssr
 *.local
 .env
+yarn.lock
 
 # compiled output
 dist/*
