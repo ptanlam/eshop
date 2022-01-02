@@ -251,7 +251,7 @@ services:
       - PORT=0.0.0.0:8000
       - EXCHANGE_RATE_GRPC_CONNECTION=currency-service:4006
       - ALLOWED_HOSTS=payment-service
-      - ALLOWED_ORIGINS=http://localhost:3000,https://festive-bassi-552424.netlify.app
+      - ALLOWED_ORIGINS=http://customer-web-client:3000,https://festive-bassi-552424.netlify.app
     mem_limit: 256m
     cpus: 0.1
     restart: unless-stopped
@@ -341,7 +341,7 @@ services:
       - GrpcConnectionOptions__CatalogServiceUrl=http://catalog-service:4000
       - GrpcConnectionOptions__VendorsServiceUrl=http://vendor-service:4004
       - GrpcConnectionOptions__PaymentsServiceUrl=http://payment-service:50051
-      - CorsOptions__AllowedOrigins=http://localhost:3000,https://festive-bassi-552424.netlify.app,https://cocky-dubinsky-6bdcf5.netlify.app
+      - CorsOptions__AllowedOrigins=http://customer-web-client:3000,https://festive-bassi-552424.netlify.app,https://cocky-dubinsky-6bdcf5.netlify.app
       - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=Ordering_Service_Db;User=SA;Password=Admin@123
     mem_limit: 128m
     cpus: 0.1
@@ -367,7 +367,7 @@ services:
       - NotificationServiceDbOptions__ConnectionString=mongodb://root:password@mongo:27017
       - NotificationServiceDbOptions__DatabaseName=Notification_Service_Db
       - NotificationServiceDbOptions__CollectionName=Notifications
-      - CorsOptions__AllowedOrigins=http://localhost:3000,https://festive-bassi-552424.netlify.app
+      - CorsOptions__AllowedOrigins=http://customer-web-client:3000,https://festive-bassi-552424.netlify.app
     mem_limit: 64m
     cpus: 0.1
     ports:
@@ -405,7 +405,7 @@ services:
     mem_limit: 64m
     cpus: 0.1
     ports:
-      - 3001:80
+      - 3002:80
     networks:
       - eshop
 
