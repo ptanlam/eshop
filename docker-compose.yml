@@ -74,9 +74,9 @@ services:
     container_name: notification-service
 
   customer-web-client:
-    build: ./frontend/customer-web-client
+    build: ./clients/customer-web-client
     container_name: customer-web-client
 
   administration-web-client:
-    build: ./frontend/administration-web-client
+    build: ./clients/administration-web-client
     container_name: administration-web-client
