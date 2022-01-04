@@ -1,0 +1,25 @@
+#productStatus {
+  display: inline;
+  font-size: 15px;
+}
+
+#outerBorder {
+  margin: auto;
+  width: 100%;
+  border: 2px dashed gray;
+}
+
+#innerBorder {
+  width: fit-content;
+  border: 1px outset whitesmoke;
+  padding: 0.5vw;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 2vw;
+  cursor: pointer;
+}
+
+#innerBorder:active {
+  border: 1px inset whitesmoke;
+}

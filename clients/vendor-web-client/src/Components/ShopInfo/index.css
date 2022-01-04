@@ -1,0 +1,59 @@
+#header {
+  text-align: Left;
+  font-size: 25px;
+  margin-top: 2vw;
+  margin-bottom: 1.5vw;
+}
+
+.info {
+  text-align: left;
+  font-size: 25px;
+}
+
+.textInput {
+  text-align: left;
+}
+
+.vendorCard {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.vendorCard:hover {
+  transform: scale(1.025);
+  transition-timing-function: ease-in-out;
+}
+
+.tab {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgb(37, 37, 37);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  border-radius: 10px 10px 0px 0px;
+  animation-duration: 3s;
+  cursor: pointer;
+}
+
+.imageBorder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid gray;
+  width: 15vw;
+  height: 15vw;
+  min-width: 180px;
+  min-height: 180px;
+}
+
+.image {
+  width: 14vw;
+  height: 14vw;
+  min-width: 170px;
+  min-height: 170px;
+}

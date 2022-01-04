@@ -73,6 +73,10 @@ services:
     build: ./clients/customer-web-client
     image: eshop_customer-web-client
 
+  vendor-web-client:
+    build: ./clients/vendor-web-client
+    image: eshop_vendor-web-client
+
   administration-web-client:
     build: ./clients/administration-web-client
     image: eshop_administration-web-client

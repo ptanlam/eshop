@@ -439,6 +439,20 @@ services:
     networks:
       - production
 
+  vendor-web-client:
+    image: eshop_vendor-web-client
+    deploy:
+      resources:
+        limits:
+          memory: 64m
+          cpus: "0.1"
+    ports:
+      - 3001:80
+    depends_on:
+      - kong-gateway
+    networks:
+      - production
+
   administration-web-client:
     image: eshop_administration-web-client
     deploy:

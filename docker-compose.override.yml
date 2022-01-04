@@ -397,6 +397,21 @@ services:
     networks:
       - development
 
+  vendor-web-client:
+    build:
+      args:
+        - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
+        - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
+        - REACT_APP_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+    ports:
+      - 3001:80
+    mem_limit: 64m
+    cpus: 0.1
+    depends_on:
+      - kong-gateway
+    networks:
+      - development
+
   administration-web-client:
     build:
       args:
