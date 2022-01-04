@@ -3,80 +3,76 @@ version: '3.9'
 services:
   kong-gateway:
     build: ./kong
-    container_name: kong-gateway
+    image: eshop_kong-gateway
 
   mssql:
     build: ./mssql
-    container_name: mssql
+    image: eshop_mssql
 
   mongo:
     image: mongo:5.0.5
-    container_name: mongo
 
   postgres:
     build: ./postgres
-    container_name: postgres
+    image: eshop_postgres
 
   redis:
     image: redis:6.2.6-alpine
-    container_name: redis
 
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq
 
   mailhog:
     image: mailhog/mailhog:v1.0.1
-    container_name: mailhog
 
   catalog-service:
     build: ./services/catalog-service
-    container_name: catalog-service
+    image: eshop_catalog-service
 
   basket-service:
     build: ./services/basket-service
-    container_name: basket-service
+    image: eshop_basket-service
 
   review-service:
     build: ./services/review-service
-    container_name: review-service
+    image: eshop_review-service
 
   storage-service:
     build: ./services/storage-service
-    container_name: storage-service
+    image: eshop_storage-service
 
   vendor-service:
     build: ./services/vendor-service
-    container_name: vendor-service
+    image: eshop_vendor-service
 
   payment-service:
     build: ./services/payment-service
-    container_name: payment-service
+    image: eshop_payment-service
 
   currency-service:
     build: ./services/currency-service
-    container_name: currency-service
+    image: eshop_currency-service
 
   discount-service:
     build: ./services/discount-service
-    container_name: discount-service
+    image: eshop_discount-service
 
   coupon-service:
     build: ./services/coupon-service
-    container_name: coupon-service
+    image: eshop_coupon-service
 
   ordering-service:
     build: ./services/ordering-service
-    container_name: ordering-service
+    image: eshop_ordering-service
 
   notification-service:
     build: ./services/notification-service
-    container_name: notification-service
+    image: eshop_notification-service
 
   customer-web-client:
     build: ./clients/customer-web-client
-    container_name: customer-web-client
+    image: eshop_customer-web-client
 
   administration-web-client:
     build: ./clients/administration-web-client
-    container_name: administration-web-client
+    image: eshop_administration-web-client
