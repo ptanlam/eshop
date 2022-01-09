@@ -135,10 +135,10 @@ services:
 
   basket-service:
     environment:
-      - REDIS_PORT=6379
-      - REDIS_HOST=redis
-      - REDIS_USERNAME=
-      - REDIS_PASSWORD=
+      - REDIS_PORT=17223
+      - REDIS_HOST=redis-17223.c291.ap-southeast-2-1.ec2.cloud.redislabs.com
+      - REDIS_USERNAME=admin
+      - REDIS_PASSWORD=Kien@04052000
       - MQ_URL=amqp://guest:guest@rabbitmq
       - DB_HOST=mssql
       - DB_PORT=1433
@@ -200,7 +200,7 @@ services:
     expose:
       - 4003
     restart: unless-stopped
-    mem_limit: 100m
+    mem_limit: 256m
     cpus: 0.1
     depends_on:
       - mssql
@@ -238,14 +238,14 @@ services:
     environment:
       - SECRET_KEY=django-insecure-@th^zqyu(bf)e3*l8*pii8@v&%=o*e18j1*knui8*esi0d71fz
       - DEBUG=False
-      - DATABASE_NAME=zvtghbnk
-      - DATABASE_USER=zvtghbnk
-      - DATABASE_PASSWORD=pPxYrMATXbecYg5l06pgxyOM7pHI_Jmt
-      - DATABASE_HOST=john.db.elephantsql.com
+      - DATABASE_NAME=payment_service_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=Admin@123
+      - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
-      - STRIPE_PUBLISHABLE_KEY=pk_test_51JeUuLJbfiWesRlhVutNUgt19kok1t6Ue2vIXAEnqOc6KEhBldDBZP9iQ51Q0E36RdShr6yoZ8aueRS4L9BG5jJx00oHqms7Kr
-      - STRIPE_SECRET_KEY=sk_test_51JeUuLJbfiWesRlhyURad3QtRuQupWNYl9qVfQ5mdls6Ve6xl96vyYOUm5FgEo4mSvULf9LV7KXVssDmQrNu3pDC001RW133QF
-      - RABBIT_MQ_URI=host.docker.internal
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - RABBIT_MQ_URI=rabbitmq
       - RABBIT_MQ_USER=guest
       - RABBIT_MQ_PASSWORD=guest
       - RABBIT_VIRTUAL_HOST=/

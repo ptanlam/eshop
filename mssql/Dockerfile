@@ -11,4 +11,4 @@ RUN dos2unix *
 RUN chmod +x /usr/src/app/import-databases.sh
 EXPOSE 1433
 USER mssql
-ENTRYPOINT /bin/bash ./entrypoint.sh
+ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ] 
