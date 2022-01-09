@@ -76,7 +76,7 @@ An e-commerce application applying micro-services architecture.
      1. `docker compose build catalog-service basket-service review-service`
      2. `docker compose build storage-service vendor-service currency-service`
      3. `docker compose build discount-service coupon-service`
-  5. Initialize databases: `chmod +x ./bootstrap.sh && ./bootstrap`
+  5. Initialize databases: `chmod +x ./bootstrap.sh && ./bootstrap.sh`
   6. Start application: `chmod +x ./start.sh && ./start.sh`
   7. Navigate to:
      1. [Customer web client](http://localhost:3000)
