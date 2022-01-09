@@ -73,8 +73,13 @@ An e-commerce application applying micro-services architecture.
      9. `export AUTH0_DOMAIN=your-auth0-credentials`
      10. `export AUTH0_SCOPE=your-auth0-credentials`
   4. Start PostgreSQL: `docker compose up postgres -d`
-  5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name=eshop-postgres$ -q) ./import-databases.sh`
-  6. Start all containers: `docker compose up -d`
-  7. Navigate to:
+  5. Initialize databases for PostgreSQL: `docker exec -it $(docker ps -f name="eshop-postgres*" -q) ./import-databases.sh`
+  6. **This step is just required for the first run**, build projects:
+     1. `docker compose build catalog-service basket-service review-service`
+     2. `docker compose build storage-service vendor-service currency-service`
+     3. `docker compose build discount-service coupon-service`
+  7. Start all containers: `docker compose up -d`
+  8. Navigate to:
      1. [Customer web client](http://localhost:3000)
-     2. [Administration web client](http://localhost:3002)
+     2. [Vendor web client](http://localhost:3001)
+     3. [Administration web client](http://localhost:3002)

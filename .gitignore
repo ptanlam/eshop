@@ -117,4 +117,7 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+
+.cache
 set-env-vars.sh
+docker-stack*

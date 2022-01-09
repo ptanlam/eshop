@@ -83,7 +83,7 @@ services:
       - development
 
   rabbitmq:
-    mem_limit: 128m
+    mem_limit: 512m
     cpus: 0.1
     healthcheck:
       test: rabbitmq-diagnostics -q ping
@@ -118,8 +118,8 @@ services:
       - REVIEW_GRPC_CONNECTION_URL=review-service:4002
       - STORAGE_GRPC_CONNECTION_URL=storage-service:4003
       - BRAND_GRPC_CONNECTION_URL=vendor-service:4004
-      - EXCHANGE_GRPC_CONNECTION_URL=host.docker.internal:4006
-      - DISCOUNT_GRPC_CONNECTION_URL=host.docker.internal:4007
+      - EXCHANGE_GRPC_CONNECTION_URL=currency-service:4006
+      - DISCOUNT_GRPC_CONNECTION_URL=discount-service:4007
     ports:
       - 3010:3000
     expose:
@@ -234,24 +234,25 @@ services:
       - development
 
   payment-service:
+    command: python3 manage.py startservice
     environment:
       - SECRET_KEY=django-insecure-@th^zqyu(bf)e3*l8*pii8@v&%=o*e18j1*knui8*esi0d71fz
       - DEBUG=False
-      - DATABASE_NAME=payment_service_db
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=Admin@123
-      - DATABASE_HOST=postgres
+      - DATABASE_NAME=zvtghbnk
+      - DATABASE_USER=zvtghbnk
+      - DATABASE_PASSWORD=pPxYrMATXbecYg5l06pgxyOM7pHI_Jmt
+      - DATABASE_HOST=john.db.elephantsql.com
       - DATABASE_PORT=5432
-      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
-      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
-      - RABBIT_MQ_URI=rabbitmq
+      - STRIPE_PUBLISHABLE_KEY=pk_test_51JeUuLJbfiWesRlhVutNUgt19kok1t6Ue2vIXAEnqOc6KEhBldDBZP9iQ51Q0E36RdShr6yoZ8aueRS4L9BG5jJx00oHqms7Kr
+      - STRIPE_SECRET_KEY=sk_test_51JeUuLJbfiWesRlhyURad3QtRuQupWNYl9qVfQ5mdls6Ve6xl96vyYOUm5FgEo4mSvULf9LV7KXVssDmQrNu3pDC001RW133QF
+      - RABBIT_MQ_URI=host.docker.internal
       - RABBIT_MQ_USER=guest
       - RABBIT_MQ_PASSWORD=guest
       - RABBIT_VIRTUAL_HOST=/
       - PORT=0.0.0.0:8000
-      - EXCHANGE_RATE_GRPC_CONNECTION=currency-service:4006
-      - ALLOWED_HOSTS=payment-service
-      - ALLOWED_ORIGINS=http://customer-web-client:3000,https://festive-bassi-552424.netlify.app
+      - EXCHANGE_RATE_GRPC_CONNECTION=host.docker.internal:4006
+      - ALLOWED_HOSTS=host.docker.internal
+      - ALLOWED_ORIGINS=http://localhost:3000,https://festive-bassi-552424.netlify.app
     mem_limit: 256m
     cpus: 0.1
     restart: unless-stopped
@@ -378,55 +379,6 @@ services:
     networks:
       - development
 
-  customer-web-client:
-    build:
-      args:
-        - REACT_APP_STRIPE_API_KEY=${STRIPE_PUBLISHABLE_KEY}
-        - REACT_APP_STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
-        - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
-        - REACT_APP_IDENTITY_PROVIDER_DOMAIN=${AUTH0_DOMAIN}
-        - REACT_APP_IDENTITY_PROVIDER_CLIENT_ID=${AUTH0_CLIENT_ID}
-        - REACT_APP_IDENTITY_PROVIDER_SCOPE=${AUTH0_SCOPE}
-        - REACT_APP_NOTIFICATION_HUB_URL=notification-service:3020/hubs
-    ports:
-      - 3000:80
-    mem_limit: 64m
-    cpus: 0.1
-    depends_on:
-      - kong-gateway
-    networks:
-      - development
-
-  vendor-web-client:
-    build:
-      args:
-        - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
-        - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
-        - REACT_APP_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
-    ports:
-      - 3001:80
-    mem_limit: 64m
-    cpus: 0.1
-    depends_on:
-      - kong-gateway
-    networks:
-      - development
-
-  administration-web-client:
-    build:
-      args:
-        - VITE_API_BASE_URL=http://localhost:8000/api
-        - VITE_AUTH0_DOMAIN=${AUTH0_DOMAIN}
-        - VITE_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
-    mem_limit: 64m
-    cpus: 0.1
-    ports:
-      - 3002:80
-    depends_on:
-      - kong-gateway
-    networks:
-      - development
-
 networks:
   development:
     driver: bridge
@@ -440,3 +392,52 @@ volumes:
     driver: local
   redis-data:
     driver: local
+
+  # customer-web-client:
+  #   build:
+  #     args:
+  #       - REACT_APP_STRIPE_API_KEY=${STRIPE_PUBLISHABLE_KEY}
+  #       - REACT_APP_STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+  #       - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
+  #       - REACT_APP_IDENTITY_PROVIDER_DOMAIN=${AUTH0_DOMAIN}
+  #       - REACT_APP_IDENTITY_PROVIDER_CLIENT_ID=${AUTH0_CLIENT_ID}
+  #       - REACT_APP_IDENTITY_PROVIDER_SCOPE=${AUTH0_SCOPE}
+  #       - REACT_APP_NOTIFICATION_HUB_URL=notification-service:3020/hubs
+  #   ports:
+  #     - 3000:80
+  #   mem_limit: 64m
+  #   cpus: 0.1
+  #   depends_on:
+  #     - kong-gateway
+  #   networks:
+  #     - development
+
+  # vendor-web-client:
+  #   build:
+  #     args:
+  #       - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
+  #       - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
+  #       - REACT_APP_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+  #   ports:
+  #     - 3001:80
+  #   mem_limit: 64m
+  #   cpus: 0.1
+  #   depends_on:
+  #     - kong-gateway
+  #   networks:
+  #     - development
+
+  # administration-web-client:
+  #   build:
+  #     args:
+  #       - VITE_API_BASE_URL=http://localhost:8000/api
+  #       - VITE_AUTH0_DOMAIN=${AUTH0_DOMAIN}
+  #       - VITE_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+  #   mem_limit: 64m
+  #   cpus: 0.1
+  #   ports:
+  #     - 3002:80
+  #   depends_on:
+  #     - kong-gateway
+  #   networks:
+  #     - development

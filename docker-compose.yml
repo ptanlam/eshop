@@ -3,18 +3,15 @@ version: '3.9'
 services:
   kong-gateway:
     build: ./kong
-    image: eshop_kong-gateway
 
   mssql:
     build: ./mssql
-    image: eshop_mssql
 
   mongo:
     image: mongo:5.0.5
 
   postgres:
     build: ./postgres
-    image: eshop_postgres
 
   redis:
     image: redis:6.2.6-alpine
@@ -26,57 +23,76 @@ services:
     image: mailhog/mailhog:v1.0.1
 
   catalog-service:
-    build: ./services/catalog-service
-    image: eshop_catalog-service
-
-  basket-service:
-    build: ./services/basket-service
-    image: eshop_basket-service
+    image: registry.gitlab.com/university-senior-project/catalog-service:1fb79b3d
 
   review-service:
-    build: ./services/review-service
-    image: eshop_review-service
+    image: registry.gitlab.com/university-senior-project/review-service:f5f6d057
+
+  basket-service:
+    image: registry.gitlab.com/university-senior-project/basket-service:ced938ff
 
   storage-service:
-    build: ./services/storage-service
-    image: eshop_storage-service
+    image: registry.gitlab.com/university-senior-project/storage-service:174ebdd4
 
   vendor-service:
-    build: ./services/vendor-service
-    image: eshop_vendor-service
+    image: registry.gitlab.com/university-senior-project/vendor-service:9f28847d
 
   payment-service:
-    build: ./services/payment-service
-    image: eshop_payment-service
+    image: registry.gitlab.com/university-senior-project/payment-service:11ab4d3e
 
   currency-service:
-    build: ./services/currency-service
-    image: eshop_currency-service
+    image: registry.gitlab.com/university-senior-project/currency-service:6dc4882e
 
   discount-service:
-    build: ./services/discount-service
-    image: eshop_discount-service
+    image: registry.gitlab.com/university-senior-project/discount-service:d8caca0c
 
   coupon-service:
-    build: ./services/coupon-service
-    image: eshop_coupon-service
+    image: registry.gitlab.com/university-senior-project/coupon-service:5e60d246
 
   ordering-service:
-    build: ./services/ordering-service
-    image: eshop_ordering-service
+    image: registry.gitlab.com/university-senior-project/ordering-service:0ff88eeb
 
   notification-service:
-    build: ./services/notification-service
-    image: eshop_notification-service
+    image: registry.gitlab.com/university-senior-project/notification-service:2b2c9676
 
-  customer-web-client:
-    build: ./clients/customer-web-client
-    image: eshop_customer-web-client
+  # catalog-service:
+  #   build: ./services/catalog-service
 
-  vendor-web-client:
-    build: ./clients/vendor-web-client
-    image: eshop_vendor-web-client
+  # basket-service:
+  #   build: ./services/basket-service
 
-  administration-web-client:
-    build: ./clients/administration-web-client
-    image: eshop_administration-web-client
+  # review-service:
+  #   build: ./services/review-service
+
+  # storage-service:
+  #   build: ./services/storage-service
+
+  # vendor-service:
+  #   build: ./services/vendor-service
+
+  # payment-service:
+  #   build: ./services/payment-service
+
+  # currency-service:
+  #   build: ./services/currency-service
+
+  # discount-service:
+  #   build: ./services/discount-service
+
+  # coupon-service:
+  #   build: ./services/coupon-service
+
+  # ordering-service:
+  #   build: ./services/ordering-service
+
+  # notification-service:
+  #   build: ./services/notification-service
+
+  # customer-web-client:
+  #   build: ./clients/customer-web-client
+
+  # vendor-web-client:
+  #   build: ./clients/vendor-web-client
+
+  # administration-web-client:
+  #   build: ./clients/administration-web-client
