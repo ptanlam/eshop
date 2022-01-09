@@ -250,7 +250,7 @@ services:
       - RABBIT_MQ_PASSWORD=guest
       - RABBIT_VIRTUAL_HOST=/
       - PORT=0.0.0.0:8000
-      - EXCHANGE_RATE_GRPC_CONNECTION=host.docker.internal:4006
+      - EXCHANGE_RATE_GRPC_CONNECTION=currency-service:4006
       - ALLOWED_HOSTS=host.docker.internal
       - ALLOWED_ORIGINS=http://localhost:3000,https://festive-bassi-552424.netlify.app
     mem_limit: 256m
