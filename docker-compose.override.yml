@@ -137,8 +137,8 @@ services:
     environment:
       - REDIS_PORT=17223
       - REDIS_HOST=redis-17223.c291.ap-southeast-2-1.ec2.cloud.redislabs.com
-      - REDIS_USERNAME=admin
-      - REDIS_PASSWORD=Kien@04052000
+      - REDIS_USERNAME=${REDIS_USERNAME}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - MQ_URL=amqp://guest:guest@rabbitmq
       - DB_HOST=mssql
       - DB_PORT=1433
