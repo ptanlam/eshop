@@ -396,6 +396,40 @@ services:
     networks:
       - development
 
+  customer-web-client:
+    build:
+      args:
+        - REACT_APP_STRIPE_API_KEY=${STRIPE_PUBLISHABLE_KEY}
+        - REACT_APP_STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+        - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
+        - REACT_APP_IDENTITY_PROVIDER_DOMAIN=${AUTH0_DOMAIN}
+        - REACT_APP_IDENTITY_PROVIDER_CLIENT_ID=${AUTH0_CLIENT_ID}
+        - REACT_APP_IDENTITY_PROVIDER_SCOPE=${AUTH0_SCOPE}
+        - REACT_APP_NOTIFICATION_HUB_URL=notification-service:3020/hubs
+    ports:
+      - 3000:80
+    mem_limit: 64m
+    cpus: 0.1
+    depends_on:
+      - kong-gateway
+    networks:
+      - development
+
+  vendor-web-client:
+    build:
+      args:
+        - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
+        - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
+        - REACT_APP_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+    ports:
+      - 3001:80
+    mem_limit: 64m
+    cpus: 0.1
+    depends_on:
+      - kong-gateway
+    networks:
+      - development
+
 networks:
   development:
     driver: bridge
@@ -409,37 +443,3 @@ volumes:
     driver: local
   redis-data:
     driver: local
-
-  # customer-web-client:
-  #   build:
-  #     args:
-  #       - REACT_APP_STRIPE_API_KEY=${STRIPE_PUBLISHABLE_KEY}
-  #       - REACT_APP_STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
-  #       - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
-  #       - REACT_APP_IDENTITY_PROVIDER_DOMAIN=${AUTH0_DOMAIN}
-  #       - REACT_APP_IDENTITY_PROVIDER_CLIENT_ID=${AUTH0_CLIENT_ID}
-  #       - REACT_APP_IDENTITY_PROVIDER_SCOPE=${AUTH0_SCOPE}
-  #       - REACT_APP_NOTIFICATION_HUB_URL=notification-service:3020/hubs
-  #   ports:
-  #     - 3000:80
-  #   mem_limit: 64m
-  #   cpus: 0.1
-  #   depends_on:
-  #     - kong-gateway
-  #   networks:
-  #     - development
-
-  # vendor-web-client:
-  #   build:
-  #     args:
-  #       - REACT_APP_API_GATEWAY_URL=http://localhost:8000/api
-  #       - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
-  #       - REACT_APP_AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
-  #   ports:
-  #     - 3001:80
-  #   mem_limit: 64m
-  #   cpus: 0.1
-  #   depends_on:
-  #     - kong-gateway
-  #   networks:
-  #     - development

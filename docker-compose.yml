@@ -88,11 +88,11 @@ services:
   # notification-service:
   #   build: ./services/notification-service
 
-  # customer-web-client:
-  #   build: ./clients/customer-web-client
+  customer-web-client:
+    build: ./clients/customer-web-client
 
-  # vendor-web-client:
-  #   build: ./clients/vendor-web-client
+  vendor-web-client:
+    build: ./clients/vendor-web-client
 
   administration-web-client:
     build: ./clients/administration-web-client
