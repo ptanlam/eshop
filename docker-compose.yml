@@ -94,5 +94,5 @@ services:
   # vendor-web-client:
   #   build: ./clients/vendor-web-client
 
-  # administration-web-client:
-  #   build: ./clients/administration-web-client
+  administration-web-client:
+    build: ./clients/administration-web-client
