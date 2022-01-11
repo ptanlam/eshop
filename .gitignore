@@ -120,4 +120,4 @@ tests/report/
 
 .cache
 set-env-vars.sh
-docker-stack*
+deploy

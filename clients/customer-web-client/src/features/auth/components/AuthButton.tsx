@@ -26,7 +26,7 @@ export function AuthButton(): ReactElement {
 
   const onClick = () => {
     if (isAuthenticated) {
-      logout();
+      logout({ returnTo: window.location.origin });
       return;
     }
     loginWithRedirect();

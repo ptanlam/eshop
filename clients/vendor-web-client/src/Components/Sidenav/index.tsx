@@ -323,7 +323,7 @@ const Sidenav = (props: any) => {
 
   const handleLogout = () => {
     localStorage.removeItem("state");
-    logout();
+    logout({ returnTo: window.location.origin });
   };
 
   const dropdownMenu = (

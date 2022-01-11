@@ -84,7 +84,6 @@ const ProductDialog = (props: any) => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    //create formdata with image
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("briefDescription", data.briefDescription);
@@ -100,25 +99,13 @@ const ProductDialog = (props: any) => {
     formData.append("categoryId", data.categoryId);
     formData.append("detailDescription", data.detailDescription);
 
-    formData.append("files", image);
+    image.forEach((element: any, index: number) => {
+      formData.append(`files`, image[index]);
+    });
 
     //send formdata to backend
     setLoading(true);
 
-    // const res = await axios({
-    //   method: "post",
-    //   url: PRODUCTS_URL,
-    //   data: formData,
-    // });
-    // if (res.status === 201 || res.status === 200) {
-    //   setLoading(false);
-    //   props.closeDialog();
-    //   alert("Thêm sản phẩm thành công");
-    //   window.location.reload();
-    // } else {
-    //   setLoading(false);
-    //   console.log(res.status);
-    // }
     await axios
       .post(`${PRODUCTS_URL}`, formData)
       .then((res) => {

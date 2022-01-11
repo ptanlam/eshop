@@ -26,7 +26,7 @@ ENV REACT_APP_NOTIFICATION_SERVICE=$REACT_APP_NOTIFICATION_SERVICE
 
 RUN yarn build && yarn --production
 
-FROM nginx:1.21.5-alpine
+FROM nginx:stable-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
