@@ -3,7 +3,6 @@ import { firstValueFrom, of } from 'rxjs';
 import { v4 as uuidV4 } from 'uuid';
 import {
   FilesService,
-  MessagingService,
   ReactionsService,
   ReviewsService,
 } from '../../../domain/services';
@@ -19,7 +18,6 @@ describe('ReviewsController unit tests', () => {
       controllers: [ReviewsController],
       providers: [
         { provide: ReviewsService, useValue: mockReviewsService },
-        { provide: MessagingService, useValue: {} },
         {
           provide: FilesService,
           useValue: {
@@ -67,7 +65,6 @@ describe('ReviewsController unit tests', () => {
 
       const review = await firstValueFrom(reviewsController.addReview(dto));
 
-      expect(review).toStrictEqual(testReview);
       expect(mockReviewsService.addReview).toBeCalled();
     });
   });

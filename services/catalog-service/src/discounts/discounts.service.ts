@@ -19,6 +19,7 @@ export class DiscountsService implements OnModuleInit, IDiscountsService {
     @Inject(discountPackageProvideToken)
     private readonly client: ClientGrpc,
   ) {}
+
   onModuleInit() {
     this._discountService =
       this.client.getService<DiscountsService>('DiscountsService');

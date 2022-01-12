@@ -11,19 +11,35 @@ export class MessagingService {
   ) {}
 
   @RabbitSubscribe({
-    // queue: 'order.approved.catalog',
-    queue: 'order.created.basket',
+    queue: 'order.approved.catalog',
     exchange: 'order',
     routingKey: '',
     queueOptions: {},
   })
   public async rpcHandler(msg: any, amqpMsg: ConsumeMessage) {
     const message = await JSON.parse(amqpMsg.content.toString()).message;
-    // const res = this.productsService.adjustProductStock(message.items);
-    // return res;
+    try {
+      const result = await this.productsService.adjustProductStock(
+        message?.items,
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   //TODO if het hang thi tra ve mot message cho vendor
+
+  @RabbitSubscribe({
+    queue: 'order.cancelled.catalog',
+    exchange: 'order',
+    routingKey: '',
+    queueOptions: {},
+  })
+  public async orderCancelledHandler(msg: any, amqpMsg: ConsumeMessage) {
+    const message = await JSON.parse(amqpMsg.content.toString()).message;
+    console.log(message);
+  }
 
   public async saveFiles(ownerId: string, filesParam: Express.Multer.File[]) {
     const files = filesParam.map((file) => ({

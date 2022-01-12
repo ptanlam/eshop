@@ -9,4 +9,5 @@ export const testReview: Review = {
   reviewerId: `reviewerId`,
 
   save: jest.fn(),
+  toJSON: jest.fn(),
 };

@@ -12,6 +12,16 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsService {
   constructor(private readonly sequelize: Sequelize) {}
 
+  async removeProducts(id: string) {
+    try {
+      return this.sequelize.query<Products>(`uspRemoveProduct @id=:id`, {
+        type: QueryTypes.SELECT,
+        replacements: { id },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
   async getCategoryListForVendor(
     brandId: string,
   ): Promise<Array<{ id: string; name: string }>> {

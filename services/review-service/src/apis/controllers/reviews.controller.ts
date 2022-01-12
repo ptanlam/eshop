@@ -106,10 +106,7 @@ export class ReviewsController {
             ),
           ),
           of(review).pipe(
-            map((review) => ({
-              ...review.toJSON(),
-              images: new Array<string>(),
-            })),
+            map(() => ({ ...review.toJSON(), images: new Array<string>() })),
           ),
         ),
       ),

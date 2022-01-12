@@ -1,4 +1,5 @@
-export function jsonParse(jsonRecord: [unknown[], unknown]) {
+export function jsonParse(jsonRecord: any) {
+  if (jsonRecord?.result === 'ok') return jsonRecord;
   return JSON.parse(
     Object.values(jsonRecord[0])
       .map((each: string) => {

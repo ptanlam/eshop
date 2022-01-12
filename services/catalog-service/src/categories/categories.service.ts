@@ -19,7 +19,7 @@ export class CategoriesService {
     try {
       const jsonRecord = await this.sequelize.query('SP_GetChildrenName');
       if (this.isEmptyJsonRecord(jsonRecord)) return [];
-      return await jsonParse(jsonRecord);
+      return jsonParse(jsonRecord);
     } catch (error) {
       return error;
     }
@@ -38,35 +38,6 @@ export class CategoriesService {
       return [categories, null];
     } catch (error) {
       return [null, error];
-    }
-  }
-
-  async countProductByCategory(id: string) {
-    try {
-      const count = await this.sequelize.query(
-        'SP_CountProductByCategory @id=:id',
-        { type: QueryTypes.SELECT, replacements: { id }, raw: true },
-      );
-      return count[0];
-    } catch (error) {
-      return error;
-    }
-  }
-
-  async getProductsByCategoryId(id: string, limit: number, offset: number) {
-    try {
-      const jsonRecord = await this.sequelize.query(
-        'SP_GetProductsByCategoryId @id=:id, @limit=:limit,@offset=:offset',
-        {
-          type: QueryTypes.RAW,
-          raw: true,
-          replacements: { id, limit, offset },
-        },
-      );
-      const products = await jsonParse(jsonRecord);
-      return products;
-    } catch (error) {
-      throw new HttpException(error.message, error.status);
     }
   }
 
@@ -138,8 +109,8 @@ export class CategoriesService {
     return res[0];
   }
 
-  isEmptyJsonRecord(jsonRecord = new Array()) {
+  isEmptyJsonRecord(jsonRecord) {
     if (jsonRecord[1] === 0) return true;
-    else false;
+    return false;
   }
 }

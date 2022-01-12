@@ -23,70 +23,37 @@ services:
     image: mailhog/mailhog:v1.0.1
 
   catalog-service:
-    image: registry.gitlab.com/university-senior-project/catalog-service:1fb79b3d
-
-  review-service:
-    image: registry.gitlab.com/university-senior-project/review-service:f5f6d057
+    build: ./services/catalog-service
 
   basket-service:
-    image: registry.gitlab.com/university-senior-project/basket-service:ced938ff
+    build: ./services/basket-service
+
+  review-service:
+    build: ./services/review-service
 
   storage-service:
-    image: registry.gitlab.com/university-senior-project/storage-service:174ebdd4
+    build: ./services/storage-service
 
   vendor-service:
-    image: registry.gitlab.com/university-senior-project/vendor-service:9f28847d
+    build: ./services/vendor-service
 
   payment-service:
-    image: registry.gitlab.com/university-senior-project/payment-service:11ab4d3e
+    build: ./services/payment-service
 
   currency-service:
-    image: registry.gitlab.com/university-senior-project/currency-service:6dc4882e
+    build: ./services/currency-service
 
   discount-service:
-    image: registry.gitlab.com/university-senior-project/discount-service:d8caca0c
+    build: ./services/discount-service
 
   coupon-service:
-    image: registry.gitlab.com/university-senior-project/coupon-service:5e60d246
+    build: ./services/coupon-service
 
   ordering-service:
-    image: registry.gitlab.com/university-senior-project/ordering-service:0ff88eeb
+    build: ./services/ordering-service
 
   notification-service:
-    image: registry.gitlab.com/university-senior-project/notification-service:2b2c9676
-
-  # catalog-service:
-  #   build: ./services/catalog-service
-
-  # basket-service:
-  #   build: ./services/basket-service
-
-  # review-service:
-  #   build: ./services/review-service
-
-  # storage-service:
-  #   build: ./services/storage-service
-
-  # vendor-service:
-  #   build: ./services/vendor-service
-
-  # payment-service:
-  #   build: ./services/payment-service
-
-  # currency-service:
-  #   build: ./services/currency-service
-
-  # discount-service:
-  #   build: ./services/discount-service
-
-  # coupon-service:
-  #   build: ./services/coupon-service
-
-  # ordering-service:
-  #   build: ./services/ordering-service
-
-  # notification-service:
-  #   build: ./services/notification-service
+    build: ./services/notification-service
 
   customer-web-client:
     build: ./clients/customer-web-client

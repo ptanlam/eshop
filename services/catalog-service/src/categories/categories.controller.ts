@@ -40,21 +40,6 @@ export class CategoriesController {
     return { ...category, images: [] };
   }
 
-  @Get(':id/products')
-  async getProductsByCategoryId(
-    @Param('id') id: string,
-    @Query('limit') limit: number,
-    @Query('offset') offset: number,
-  ) {
-    const count = await this.categoriesService.countProductByCategory(id);
-    if (!count.count) return { data: [], pagination: { total: count } };
-    else {
-      const [products, error] =
-        await this.categoriesService.getProductsByCategoryId(id, limit, offset);
-      return { data: products, pagination: { total: count } };
-    }
-  }
-
   @Get('name')
   async getNameFilter() {
     return this.categoriesService.getNameFilter();
@@ -64,13 +49,14 @@ export class CategoriesController {
   async getAllCategories() {
     const [categories, error] = await this.categoriesService.getAllCategories();
     if (!categories.length) return [];
-    return await this.mapImageToChild(categories);
+
+    return this.mapImageToChild(categories);
   }
 
   async mapImageToChild(categories) {
-    return await Promise.all(
+    return Promise.all(
       categories.map(async (category) => {
-        if (category.children.length !== 0) {
+        if (category.children?.length !== 0) {
           category.children = await this.mapImageToChild(category.children);
         }
         const images = await this.getImages(category.id);

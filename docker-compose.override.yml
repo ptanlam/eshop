@@ -307,6 +307,7 @@ services:
     restart: unless-stopped
     depends_on:
       - mssql
+      - rabbitmq
     ports:
       - 3017:3000
     expose:

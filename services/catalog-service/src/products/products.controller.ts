@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -19,7 +20,6 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { filter, firstValueFrom, from, map, mergeMap, timeout } from 'rxjs';
 import { GetCategoryListForVendorRequest } from 'src/product-grpc/interface/GetCategoryListForVendorRequest';
 import { GetCategoryListForVendorResponse } from 'src/product-grpc/interface/GetCategoryListForVendorResponse';
-import { buffer } from 'stream/consumers';
 import { BrandsService } from '../brands/brands.service';
 import { GetVendorInfoResponse } from '../brands/interfaces/getVendorInfoResponse.interface';
 import { CategoriesService } from '../categories/categories.service';
@@ -147,7 +147,6 @@ export class ProductsController {
     @Param('id') id: string,
     @Query('unit') unit: string = defaultCurrency,
   ) {
-    console.log(unit);
     const product = await this.productsService.getProductById(id);
     if (!product?.id) throw new NotFoundException();
 
@@ -199,6 +198,15 @@ export class ProductsController {
 
   @Patch()
   async updateProduct(@Body() updateProductDto: UpdateProductDto) {}
+
+  @Delete(':id')
+  async removeProduct(@Param('id') id: string) {
+    const products = await this.productsService.removeProducts(id);
+    if (!products?.length) {
+      return new BadRequestException(`Product with id ${id} doesn't exist`);
+    }
+    return products;
+  }
 
   @Post()
   @UseInterceptors(FileFieldsInterceptor([{ name: 'files' }]))
