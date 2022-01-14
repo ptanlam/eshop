@@ -25,9 +25,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import CircleIcon from "@mui/icons-material/Circle";
-import { red } from "@mui/material/colors";
 import CSS from "csstype";
 import "./index.css";
 import axios from "axios";
@@ -63,101 +60,6 @@ const deleteButtonStyle: CSS.Properties = {
 };
 const updateButtonStyle = { ...deleteButtonStyle, marginRight: "1vw" };
 
-const Row = (props: { row: any; categoryName: string }) => {
-  const { row, categoryName } = props;
-  const [open, setOpen] = useState(false);
-  const image = (url: string) => {
-    try {
-      return (
-        <img
-          src={url}
-          style={{ margin: "1px", width: "20vw", height: "15vw" }}
-        />
-      );
-    } catch {
-      <img
-        src="https://via.placeholder.com/150"
-        style={{ margin: "1px", width: 300, height: 175 }}
-      />;
-    }
-  };
-
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const updateProduct = () => {
-    setOpenDialog(!openDialog);
-  };
-
-  const closeDialog = () => {
-    setOpenDialog(!openDialog);
-  };
-
-  return (
-    <Fragment>
-      {openDialog && (
-        <ProductDialog
-          open={openDialog}
-          closeDialog={closeDialog}
-          categoryName={categoryName}
-          categoryId={row.id}
-          productId={row.id}
-        />
-      )}
-      <TableRow key={row.id}>
-        <TableCell>{row.name}</TableCell>
-        <TableCell>
-          {row.price.amount}/{row.price.unit}
-        </TableCell>
-        <TableCell>{row.stock}</TableCell>
-        <TableCell>
-          <Button
-            variant="contained"
-            color="warning"
-            style={updateButtonStyle}
-            onClick={() => updateProduct()}
-          >
-            Update
-          </Button>
-          <Button variant="contained" color="error" style={deleteButtonStyle}>
-            Delete
-          </Button>
-        </TableCell>
-        <TableCell>
-          <IconButton size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
-          <Collapse in={open} timeout="auto">
-            <Box sx={{ margin: 1 }}>
-              <div>
-                <div style={{ fontSize: "10px", color: "gray" }}>
-                  ID: {row.id}
-                </div>
-              </div>
-              <br />
-              <Grid container spacing={2} style={{ textAlign: "center" }}>
-                <Grid item xs={12} md={5}>
-                  {image(row.images[0]?.url)}
-                </Grid>
-                <Grid item xs={12} md={2}>
-                  <p>Lượt Review: {row.review.numberOfReviews}</p>
-                  <Rating value={row.review.rating} precision={0.5} readOnly />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  {row.briefDescription}
-                </Grid>
-              </Grid>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </Fragment>
-  );
-};
-
 const Products = (props: any) => {
   const { row } = props.location.state;
   const categoryName = row.name;
@@ -168,6 +70,125 @@ const Products = (props: any) => {
   const [vendorList, setVendorList] = useState<any>([]);
   const [vendorSelected, setvendorSelected] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+
+  const Row = (props: { row: any; categoryName: string }) => {
+    const { row, categoryName } = props;
+    const [open, setOpen] = useState(false);
+    const image = (url: string) => {
+      try {
+        return (
+          <img
+            src={url}
+            style={{ margin: "1px", width: "20vw", height: "15vw" }}
+          />
+        );
+      } catch {
+        <img
+          src="https://via.placeholder.com/150"
+          style={{ margin: "1px", width: 300, height: 175 }}
+        />;
+      }
+    };
+
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const updateProduct = () => {
+      setOpenDialog(!openDialog);
+    };
+
+    const closeDialog = () => {
+      setOpenDialog(!openDialog);
+    };
+
+    const deleteProduct = () => {
+      setLoading(true);
+      axios
+        .delete(`${PRODUCTS_URL}/${row.id}`)
+        .then((res) => {
+          setLoading(false);
+          alert("Xóa thành công");
+          window.location.reload();
+        })
+        .catch((err) => {
+          setLoading(false);
+          alert("Xóa thất bại");
+        });
+    };
+
+    return (
+      <Fragment>
+        {openDialog && (
+          <ProductDialog
+            open={openDialog}
+            closeDialog={closeDialog}
+            categoryName={categoryName}
+            categoryId={row.id}
+            productId={row.id}
+          />
+        )}
+        <TableRow key={row.id}>
+          <TableCell>{row.name}</TableCell>
+          <TableCell>
+            {row.price.amount}/{row.price.unit}
+          </TableCell>
+          <TableCell>{row.stock}</TableCell>
+          <TableCell>
+            <Button
+              variant="contained"
+              color="warning"
+              style={updateButtonStyle}
+              onClick={() => updateProduct()}
+            >
+              Update
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              style={deleteButtonStyle}
+              onClick={() => deleteProduct()}
+            >
+              Delete
+            </Button>
+          </TableCell>
+          <TableCell>
+            <IconButton size="small" onClick={() => setOpen(!open)}>
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+            <Collapse in={open} timeout="auto">
+              <Box sx={{ margin: 1 }}>
+                <div>
+                  <div style={{ fontSize: "10px", color: "gray" }}>
+                    ID: {row.id}
+                  </div>
+                </div>
+                <br />
+                <Grid container spacing={2} style={{ textAlign: "center" }}>
+                  <Grid item xs={12} md={5}>
+                    {image(row.images[0]?.url)}
+                  </Grid>
+                  <Grid item xs={12} md={2}>
+                    <p>Lượt Review: {row.review.numberOfReviews}</p>
+                    <Rating
+                      value={row.review.rating}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={5}>
+                    {row.briefDescription}
+                  </Grid>
+                </Grid>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </Fragment>
+    );
+  };
 
   const addProduct = () => {
     setOpenDialog(!openDialog);

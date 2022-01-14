@@ -151,15 +151,26 @@ const ShopInfo = () => {
     formData.append("logo", image);
 
     setIsLoading(true);
-    const res = await axios.post(`${VENDOR_URL}`, formData);
-    if (res.status === 201 || res.status === 200) {
+    try {
+      await axios.post(`${VENDOR_URL}`, formData).then(() => {
+        setIsLoading(false);
+        alert("Tạo thành công");
+        fetchVendor(user?.sub!);
+      });
+      window.location.reload();
+    } catch {
       setIsLoading(false);
-      alert("Tạo thành công. Vui lòng tải lại trang");
-      fetchVendor(user?.sub!);
-    } else {
-      setIsLoading(false);
-      alert(res.data.message);
+      alert("Lỗi kết nối server");
     }
+    // const res = await axios.post(`${VENDOR_URL}`, formData);
+    // if (res.status === 201 || res.status === 200) {
+    //   setIsLoading(false);
+    //   alert("Tạo thành công. Vui lòng tải lại trang");
+    //   fetchVendor(user?.sub!);
+    // } else {
+    //   setIsLoading(false);
+    //   alert(res.data.message);
+    // }
   };
 
   //update vendor

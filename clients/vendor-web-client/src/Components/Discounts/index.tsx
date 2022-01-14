@@ -221,10 +221,9 @@ const Row = (props: { row: any }) => {
               <TableBody>
                 {row.product
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((item) => {
+                  .map((item: any) => {
                     return (
                       <TableRow>
-                        
                         <TableCell>1</TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell>
@@ -365,7 +364,7 @@ const Discounts = () => {
                   <TableCell>Ưu tiên</TableCell>
                   <TableCell>Số lần SD</TableCell>
                   <TableCell>Discount Rule</TableCell>
-                  <TableCell>Sản Phẩm</TableCell>
+                  {/* <TableCell>Sản Phẩm</TableCell> */}
                   <TableCell colSpan={2}>Trạng Thái</TableCell>
                 </TableHead>
                 <TableBody>

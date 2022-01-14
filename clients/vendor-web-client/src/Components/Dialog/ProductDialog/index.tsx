@@ -173,9 +173,9 @@ const ProductDialog = (props: any) => {
     }
   };
 
-  useEffect(() => {
-    setValues((prevState: any) => ({ ...prevState, attribute }));
-  }, [attribute]);
+  // useEffect(() => {
+  //   setValues((prevState: any) => ({ ...prevState, attribute }));
+  // }, [attribute]);
 
   // useEffect(() => {
   //   console.log(values);

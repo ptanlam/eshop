@@ -277,7 +277,7 @@ const AddDiscountDialog = (props: any) => {
     formData.append("files", image);
 
     addedProducts.forEach((item: any, index: number) => {
-      formData.append(`product[${index}]`, item.id);
+      formData.append(`productId[${index}]`, item.id);
     });
 
     setFormLoading(true);
